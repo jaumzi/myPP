@@ -1,0 +1,12 @@
+.gridButtons {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 12px;
+}
+
+.gridButtons > * {
+    flex: 1 1 200px;
+    max-width: 200px;
+}
