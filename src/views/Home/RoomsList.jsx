@@ -10,6 +10,8 @@ function RoomsList() {
     });
     const { rooms } = state;
 
+    console.log(userLogged);
+
     useEffect(() => {
         const listenerRooms = firebase.db.collection('rooms').doc(userLogged.uid)
             .onSnapshot(function (doc) {
@@ -27,7 +29,7 @@ function RoomsList() {
             <ul>
                 {rooms?.map((room, i) => (
                     <li key={`rooms-${i}`} >
-                        <Link to={`/room/${room.id}`}>{room.name}</Link>
+                        <Link to={`/room/${room.roomId}`}>{room.name}</Link>
                     </li>
                 ))}
             </ul>

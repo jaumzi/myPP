@@ -10,3 +10,10 @@
     flex: 1 1 200px;
     max-width: 200px;
 }
+
+.btn-vote {
+    background-color: white;
+}
+.btn-vote-active {
+    background-color: orange;
+}

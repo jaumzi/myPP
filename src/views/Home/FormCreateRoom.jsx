@@ -6,12 +6,12 @@ import { AppContext } from '../../config/AppConfig';
 const buttonVotes = '0,1,2,3,5,8,13,20,40,?';
 
 function FormCreateRoom() {
-    const {  userLogged } = useContext(AppContext);
+    const { userLogged } = useContext(AppContext);
     const formRef = useRef(null);
 
     const { teste } = useParams();
 
-    const handleCreateRoom = async (e) => {
+    async function handleCreateRoom (e) {
         e.preventDefault();
         const nameRoom = formRef.current.elements['nameRoom'].value;
         const roomId = `${userLogged.uid}-${new Date().getTime()}${Math.floor(Math.random() * 101)}`;
@@ -40,7 +40,10 @@ function FormCreateRoom() {
             createBy: userLogged.uid,
             votes: [],
             players: [],
-            average: 0, 
+            observers: [],
+            average: 0,
+            subject: '',
+            showVotes: false,
          });
 
         // zerar inpout
