@@ -12,7 +12,7 @@ function AppConfig(props) {
         firebaseInitialized: false,
         userLogged: undefined
     });
-    const { firebaseInitialized, userLogged } = state;
+    const { firebaseInitialized } = state;
 
     useEffect(() => {
         firebase.observerLogin().then((user) => {
@@ -40,7 +40,6 @@ function AppConfig(props) {
                 }));
             }
         }).catch((err) => {
-            console.log(err);
             setState(old => ({
                 ...old,
                 userLogged: undefined,

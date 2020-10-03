@@ -11,7 +11,7 @@ function FormCreatePlayer(props) {
 
     useEffect(() => {
         formRef.current.elements['namePlayer'].value = userLogged.name;
-    }, []);
+    }, [userLogged]);
 
     function handleCreatePlayer(e) {
         e.preventDefault();

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import firebase from '../../config/FirebaseConfig';
 import { AppContext } from '../../config/AppConfig';
 import { Link } from 'react-router-dom';
@@ -10,19 +10,16 @@ function RoomsList() {
     });
     const { rooms } = state;
 
-    console.log(userLogged);
-
     useEffect(() => {
         const listenerRooms = firebase.db.collection('rooms').doc(userLogged.uid)
             .onSnapshot(function (doc) {
-                console.log(doc, doc.data());
                 setState(prev => ({ ...prev, rooms: doc.data()?.rooms }));
             });
 
         return () => {
             listenerRooms();
         };
-    }, []);
+    }, [userLogged]);
 
     return (
         <div>

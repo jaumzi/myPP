@@ -1,16 +1,11 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import firebase from '../../config/FirebaseConfig';
 import { AppContext } from '../../config/AppConfig';
 
 function Login() {
     const history = useHistory();
-    const { setUserLogged, userLogged: logged } = useContext(AppContext);
-
-    const [state, setState] = useState({
-        userLogged: !!logged ?? false,
-    });
-    const { userLogged } = state;
+    const { setUserLogged } = useContext(AppContext);
 
     const handleClick = () => {
         firebase.login().then(
@@ -20,22 +15,17 @@ function Login() {
                 displayName: name,
                 photoURL: photo
             } }) => {
-                setState(old => ({ ...old, userLogged: true }));
                 setUserLogged({
                     uid,
                     email,
                     name,
                     photo
                 });
+                history.push('/');
             }).catch((err) => {
                 console.log(err);
             });
     };
-
-    console.log(userLogged);
-    if (userLogged) {
-        history.push('/');
-    }
 
     return (
         <div>

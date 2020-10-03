@@ -11,7 +11,7 @@ import Room from '../views/Room/Room';
 import { AppContext } from './AppConfig';
 
 function PrivateRoute({ children, ...rest }) {
-    const { userLogged, firebaseInitialized } = useContext(AppContext);
+    const { userLogged, firebaseInitialized } = useContext(AppContext);;
     return (
         <Route
             {...rest}

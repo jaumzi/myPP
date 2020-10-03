@@ -1,5 +1,5 @@
-import React, { memo, useContext, useEffect, useRef, useState } from 'react';
-import { Link, useHistory, useLocation, useParams } from 'react-router-dom';
+import React, { memo, useContext, useEffect, useState } from 'react';
+import { Link, useHistory, useParams } from 'react-router-dom';
 import firebase from '../../config/FirebaseConfig';
 import { AppContext } from '../../config/AppConfig';
 
@@ -28,7 +28,7 @@ function Room() {
         return () => {
             listenerRoom();
         };
-    }, []);
+    }, [docFirebaseRef]);
 
     function handleVote(vote) {
         const voteIndex = room.votes.findIndex(vote => vote.userId === userLogged.uid);
@@ -59,9 +59,9 @@ function Room() {
             observers: room.observers.filter(observer => observer.userId !== userLogged.uid)
         });
     }
-    function handleShowVotes() {
+    function handleVotes() {
         docFirebaseRef.update({
-            showVotes: true
+            showVotes: !room.showVotes
         });
     }
     function handleClearVotes() {
@@ -75,7 +75,7 @@ function Room() {
         let totalVotes = 0;
         if (room?.votes?.length > 0) {
             room.votes.map(vote => {
-                totalVotes += vote.value;
+                return totalVotes += Number(vote.value) || 0;
             });
             average = (totalVotes / room?.votes?.length);
         }
@@ -86,12 +86,8 @@ function Room() {
     const player = room?.players?.find(player => player.userId === userLogged.uid);
     const observer = room?.observers?.find(observer => observer.userId === userLogged.uid);
     const link = URL_BASE + history.location.pathname;
-
     const vote = room?.votes?.find(vote => vote.userId === userLogged.uid);
-
     const average = calcAverage();
-
-    console.log(room, room?.votes.length);
 
     return (
         <div>
@@ -158,9 +154,9 @@ function Room() {
                     {room.createBy === userLogged.uid && (
                         <>
                             <button
-                                onClick={handleShowVotes}
+                                onClick={handleVotes}
                             >
-                                Mostrar votos
+                                {room.showVotes ? 'Esconder votos' : 'Mostrar votos'}
                             </button>
                             <button
                                 onClick={handleClearVotes}

@@ -1,5 +1,4 @@
 import React, { useContext, useRef } from 'react';
-import { useParams } from 'react-router-dom';
 import firebase from '../../config/FirebaseConfig';
 import { AppContext } from '../../config/AppConfig';
 
@@ -8,8 +7,6 @@ const buttonVotes = '0,1,2,3,5,8,13,20,40,?';
 function FormCreateRoom() {
     const { userLogged } = useContext(AppContext);
     const formRef = useRef(null);
-
-    const { teste } = useParams();
 
     async function handleCreateRoom (e) {
         e.preventDefault();
@@ -46,7 +43,7 @@ function FormCreateRoom() {
             showVotes: false,
          });
 
-        // zerar inpout
+        // zerar input
         formRef.current.elements['nameRoom'].value = '';
     };
 
