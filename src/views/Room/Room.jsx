@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { memo, useContext, useEffect, useState } from 'react';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import firebase from '../../config/FirebaseConfig';
@@ -28,7 +29,7 @@ function Room() {
         return () => {
             listenerRoom();
         };
-    }, [docFirebaseRef]);
+    }, [params.id]);
 
     function handleVote(vote) {
         const voteIndex = room.votes.findIndex(vote => vote.userId === userLogged.uid);
@@ -90,6 +91,8 @@ function Room() {
     const vote = room?.votes?.find(vote => vote.userId === userLogged.uid);
     const average = calcAverage();
 
+    console.log(player, observer);
+
     return (
         <div className="layout" >
             <div className="user-info" >
@@ -128,7 +131,7 @@ function Room() {
                     {(player || observer) && (
                         <>
                             <div className="user-perfil">
-                                <h4>{player.userName}</h4>
+                                <h4>{player?.userName ?? observer?.userName}</h4>
                                 <button onClick={handleExit}>{`Sair do perfil de ${player ? 'Jogador' : 'Observador'}`}</button>
                             </div>
 

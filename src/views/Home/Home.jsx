@@ -25,7 +25,7 @@ function Home() {
                 <FormCreateRoom />
             </div>
             <br/>
-            <h3>Minhas salas:</h3>
+            <h3 className="title" >Minhas salas:</h3>
             <br/>
             <RoomsList />
         </div>

@@ -20,6 +20,8 @@ function FormCreateRoom() {
                 roomId: roomId,
                 name: nameRoom,
                 createBy: userLogged.uid,
+                createByName: userLogged.name,
+                createByEmail: userLogged.email,
             };
 
             const docRef = firebase.db.collection('rooms').doc(userLogged.uid);
