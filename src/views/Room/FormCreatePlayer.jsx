@@ -3,6 +3,8 @@ import firebase from '../../config/FirebaseConfig';
 import { AppContext } from '../../config/AppConfig';
 import { useParams } from 'react-router-dom';
 
+import './FormCreatePlayer.css';
+
 function FormCreatePlayer(props) {
     const { room } = props;
     const { userLogged } = useContext(AppContext);
@@ -46,18 +48,16 @@ function FormCreatePlayer(props) {
     }
 
     return (
-        <div>
+        <div className="form-layout">
             <form ref={formRef} onSubmit={handleCreatePlayer} >
-                <div>
+                <div className="form-content">
                     <input id="namePlayer" label="Nome do jogador" />
-                    <button type="submit" >Criar jogador</button>
+                    <button type="submit" className="btn-player" >Criar jogador</button>
                 </div>
             </form>
-
-            <br />
-            <br />
-
-            <button type="submit" onClick={handleCreateObserver} >Entrar como observador</button>
+            <button type="submit" onClick={handleCreateObserver} >
+                Observador
+            </button>
         </div>
     );
 }

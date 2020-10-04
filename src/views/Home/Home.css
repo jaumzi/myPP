@@ -1,0 +1,25 @@
+.layout {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 40px auto;
+    width: 100%;
+    max-width: 600px;
+}
+.user-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+.form-section {
+    padding: 8px;
+    width: 100%;
+}
+
+.logout {
+    border: 2px solid rgb(255 255 255 / 0.8);
+    background-color: white;
+    color: black;
+}

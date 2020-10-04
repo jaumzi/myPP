@@ -1,0 +1,11 @@
+.form-layout {
+    display: flex;
+}
+.form-conten {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.btn-player {
+    min-width: 128px !important;
+}

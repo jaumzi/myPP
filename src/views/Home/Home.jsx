@@ -4,8 +4,10 @@ import { AppContext } from '../../config/AppConfig';
 import FormCreateRoom from './FormCreateRoom';
 import RoomsList from './RoomsList';
 
+import './Home.css';
+
 function Home() {
-    const { setUserLogged } = useContext(AppContext);
+    const { setUserLogged, userLogged } = useContext(AppContext);
 
     const handleLogOut = () => {
         firebase.logout();
@@ -13,10 +15,17 @@ function Home() {
     };
     
     return (
-        <div>
-            <button onClick={handleLogOut} >Sair</button>
+        <div className="layout" >
+            <div className="user-info" >
+                <button className="logout" onClick={handleLogOut} >Sair</button>
+                <span>{userLogged.email}</span>
+            </div>
             <br />
-            <FormCreateRoom />
+            <div className="form-section" >
+                <FormCreateRoom />
+            </div>
+            <br/>
+            <h3>Minhas salas:</h3>
             <br/>
             <RoomsList />
         </div>

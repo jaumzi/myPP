@@ -1,0 +1,12 @@
+.form-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+.form-content button {
+    min-width: 145px;
+}
+.form-layout, .form-layout > form {
+    width: 100%;
+}

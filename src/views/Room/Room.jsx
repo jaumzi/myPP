@@ -56,7 +56,8 @@ function Room() {
     function handleExit() {
         docFirebaseRef.update({
             players: room.players.filter(player => player.userId !== userLogged.uid),
-            observers: room.observers.filter(observer => observer.userId !== userLogged.uid)
+            observers: room.observers.filter(observer => observer.userId !== userLogged.uid),
+            votes: room.votes.filter(vote => vote.userId !== userLogged.uid)
         });
     }
     function handleVotes() {
@@ -90,30 +91,34 @@ function Room() {
     const average = calcAverage();
 
     return (
-        <div>
-            <Link to='/'>Voltar para início</Link>
+        <div className="layout" >
+            <div className="user-info" >
+                <Link to='/'><button className="back-page" >Voltar para início</button></Link>
+                <span>{userLogged.email}</span>
+            </div>
             <br />
             {!!room && (
                 <>
                     <div>
-                        <h4>Link para compartilhar:</h4>
-                        <div>
-                            <h3>{link}</h3>
-                            <button
-                                onClick={() => {
-                                    navigator.clipboard.writeText(link);
-                                    setState(prev => ({ ...prev, textCopy: true }));
-                                }}
-                            >
-                                Clique aqui para copiar
-                            </button>
-                            {textCopy && (
-                                <span>Copiado!</span>
-                            )}
+                        <div className="box-link" >
+                            <div className="header">
+                                <h4>Link para compartilhar a sala:</h4>
+                                <button
+                                    onClick={() => {
+                                        navigator.clipboard.writeText(link);
+                                        setState(prev => ({ ...prev, textCopy: true }));
+                                    }}
+                                >
+                                    Copiar
+                                </button>
+                                {textCopy && (
+                                    <span>Copiado!</span>
+                                )}
+                            </div>
+                            <h3 className="link" >{link}</h3>
                         </div>
-                    </div>
 
-                    <br />
+                    </div>
                     <br />
 
                     {(!player && !observer) && (
@@ -122,67 +127,74 @@ function Room() {
 
                     {(player || observer) && (
                         <>
+                            <div className="user-perfil">
+                                <h4>{player.userName}</h4>
+                                <button onClick={handleExit}>{`Sair do perfil de ${player ? 'Jogador' : 'Observador'}`}</button>
+                            </div>
 
-                            <button onClick={handleExit}>{`Sair do perfil de '${player ? 'Jogador' : 'Observador'}'`}</button>
-
-                            <br />
                             <br />
 
                             {room.createBy === userLogged.uid && (
                                 <FormSubject subject={room.subject} />
                             )}
 
-                            <h5>Assunto: {room.subject}</h5>
+                            <h3>Assunto: {room.subject}</h3>
 
                         </>
                     )}
 
-                    {player && (
-                        <div className="gridButtons">
-                            {room.buttons.map((btn, i) => (
-                                <button
-                                    key={`buttons-${i}`}
-                                    className={vote?.value === btn ? 'btn-vote-active' : 'btn-vote'}
-                                    onClick={() => handleVote(btn)}
-                                >
-                                    {btn}
-                                </button>
-                            ))}
-                        </div>
-                    )}
+                    {(player || observer) && (
+                        <div className="game-content" >
+                            <div className="box-votes" >
+                                <h5 className="title">Votos:</h5>
+                                {(room.createBy === userLogged.uid && room?.votes.length > 0) && (
+                                    <div className="options">
+                                        <button
+                                            onClick={handleVotes}
+                                        >
+                                            {room.showVotes ? 'Esconder votos' : 'Mostrar votos'}
+                                        </button>
+                                        <button
+                                            onClick={handleClearVotes}
+                                        >
+                                            Limpar votos
+                                    </button>
+                                    </div>
+                                )}
 
-                    {room.createBy === userLogged.uid && (
-                        <>
-                            <button
-                                onClick={handleVotes}
-                            >
-                                {room.showVotes ? 'Esconder votos' : 'Mostrar votos'}
-                            </button>
-                            <button
-                                onClick={handleClearVotes}
-                            >
-                                Limpar votos
-                            </button>
-                        </>
-                    )}
+                                {(room?.votes.length > 0) && (
+                                    <div className="list-votes" >
+                                        {room?.votes.map((vote, i) => (
+                                            <div key={`votes-${i}`} className="options">
+                                                <span><strong>{vote.userName}</strong></span>
+                                                <span>{room.showVotes ? vote.value : 'X'}</span>
+                                            </div>
+                                        ))}
+                                        {room.showVotes && (
+                                            <div className="options">
+                                                <span><strong className="average">Média</strong></span>
+                                                <span><strong className="average">{average}</strong></span>
+                                            </div>
+                                        )}
+                                    </div>
+                                )}
+                            </div>
 
-                    {(room?.votes.length > 0) && (
-                        <div>
-                            {room?.votes.map((vote, i) => (
-                                <div key={`votes-${i}`}>
-                                    <span><strong>{vote.userName}</strong></span>
-                                    <span>{room.showVotes ? vote.value : 'X'}</span>
-                                </div>
-                            ))}
-                            {room.showVotes && (
-                                <div>
-                                    <span><strong>Média</strong></span>
-                                    <span>{average}</span>
+                            {player && (
+                                <div className="gridButtons">
+                                    {room.buttons.map((btn, i) => (
+                                        <button
+                                            key={`buttons-${i}`}
+                                            className={vote?.value === btn ? 'btn-vote-active' : 'btn-vote'}
+                                            onClick={() => handleVote(btn)}
+                                        >
+                                            {btn}
+                                        </button>
+                                    ))}
                                 </div>
                             )}
                         </div>
                     )}
-
                 </>
             )}
             {!room && (

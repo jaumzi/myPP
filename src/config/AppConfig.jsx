@@ -1,4 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
+import Loading from '../components/Loading/Loading';
 import firebase from './FirebaseConfig';
 
 const AppContext = createContext({
@@ -63,7 +64,7 @@ function AppConfig(props) {
                 {firebaseInitialized ? (
                     children
                 ) : (
-                        <h1>Carregando!</h1>
+                        <Loading />
                     )}
             </AppContext.Provider>
         </>

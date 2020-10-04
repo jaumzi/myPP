@@ -3,6 +3,8 @@ import { useHistory } from 'react-router-dom';
 import firebase from '../../config/FirebaseConfig';
 import { AppContext } from '../../config/AppConfig';
 
+import './Login.css';
+
 function Login() {
     const history = useHistory();
     const { setUserLogged } = useContext(AppContext);
@@ -28,7 +30,7 @@ function Login() {
     };
 
     return (
-        <div>
+        <div className="login-layout">
             <h3>Faça login</h3>
             <button onClick={handleClick} >Entrar com google</button>
         </div>

@@ -1,0 +1,7 @@
+.form-layout {
+    display: flex;
+    align-items: center;
+}
+.form-layout button {
+    min-width: 105px;
+}

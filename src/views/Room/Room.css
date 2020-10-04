@@ -1,19 +1,100 @@
+.layout {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 40px auto;
+    width: 100%;
+    max-width: 600px;
+}
+
 .gridButtons {
     display: flex;
     flex-wrap: wrap;
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 12px;
+    margin-left: 12px;
 }
 
 .gridButtons > * {
-    flex: 1 1 200px;
-    max-width: 200px;
+    flex: 1 1 50px;
+    max-width: 50px;
 }
 
 .btn-vote {
     background-color: white;
+    color: black;
 }
 .btn-vote-active {
-    background-color: orange;
+    background-color: #FF5722;
+    color: white;
+}
+
+.back-page {
+    border: 2px solid rgb(255 255 255 / 0.8);
+    background-color: white;
+    color: black;
+}
+
+.box-link {
+    padding: 12px;
+    border: 2px #673ab7 solid;
+    border-radius: 6px;
+    background-color: black;
+}
+.box-link > .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.box-link > .link {
+    word-break: break-word;
+}
+
+.list-votes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    margin: 0px 8px;
+}
+.list-votes > .options {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 8px 0px;
+    border-bottom: 2px #673ab7 solid;
+}
+.list-votes > .options:last-child {
+    border: none;
+}
+
+.user-perfil {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.average {
+    color: #ff5722;
+}
+.box-votes {
+    min-width: 300px;
+    border: 2px #673ab7 solid;
+    border-radius: 6px;
+    background-color: black;
+}
+.box-votes > .title {
+    margin: 8px;
+}
+.box-votes > .options {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.game-content {
+    display: flex;
 }

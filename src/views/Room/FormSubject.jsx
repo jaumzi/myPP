@@ -3,6 +3,8 @@ import firebase from '../../config/FirebaseConfig';
 import { AppContext } from '../../config/AppConfig';
 import { useParams } from 'react-router-dom';
 
+import './FormSubject.css';
+
 function FormSubject(props) {
     const { subject } = props;
     const { userLogged } = useContext(AppContext);
@@ -31,9 +33,9 @@ function FormSubject(props) {
     };
 
     return (
-        <div>
+        <div className="form-layout" >
             <form ref={formRef} onSubmit={handleDefineSubject} >
-                <div>
+                <div className="form-content" >
                     <input id="subject" label="Assunto" />
                     <button type="submit">Definir assunto</button>
                 </div>
