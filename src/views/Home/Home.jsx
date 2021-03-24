@@ -13,7 +13,7 @@ function Home() {
         firebase.logout();
         setUserLogged(undefined);
     };
-    
+
     return (
         <div className="layout" >
             <div className="user-info" >
@@ -24,9 +24,9 @@ function Home() {
             <div className="form-section" >
                 <FormCreateRoom />
             </div>
-            <br/>
+            <br />
             <h3 className="title" >Minhas salas:</h3>
-            <br/>
+            <br />
             <RoomsList />
         </div>
     );

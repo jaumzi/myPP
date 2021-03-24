@@ -10,13 +10,15 @@ function Login() {
     const { setUserLogged } = useContext(AppContext);
 
     const handleClick = () => {
-        firebase.login().then(
-            ({ user: {
-                uid,
-                email,
-                displayName: name,
-                photoURL: photo
-            } }) => {
+        firebase.login()
+            .then(({
+                user: {
+                    uid,
+                    email,
+                    displayName: name,
+                    photoURL: photo
+                }
+            }) => {
                 setUserLogged({
                     uid,
                     email,

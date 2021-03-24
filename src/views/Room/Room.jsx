@@ -91,8 +91,6 @@ function Room() {
     const vote = room?.votes?.find(vote => vote.userId === userLogged.uid);
     const average = calcAverage();
 
-    console.log(player, observer);
-
     return (
         <div className="layout" >
             <div className="user-info" >
@@ -118,7 +116,7 @@ function Room() {
                                     <span>Copiado!</span>
                                 )}
                             </div>
-                            <h3 className="link" >{link}</h3>
+                            <h5 className="link" >{link}</h5>
                         </div>
 
                     </div>
